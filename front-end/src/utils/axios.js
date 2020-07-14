@@ -7,7 +7,7 @@ import pickBy from 'lodash/pickBy'
 Vue.use(VueCookie)
 
 const axiosInstance = axios.create({
-  baseURL: 'http://api.webchat.com:8000',
+  baseURL: 'http://localhost:8000',
   paramsSerializer: params => qs.stringify(params, { arrayFormat: 'repeat' }),
   timeout: 5000,
   headers: {
