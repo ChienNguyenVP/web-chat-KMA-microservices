@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  contact:
+    build:
+      context: '.'
+      dockerfile: ./docker/php/Dockerfile
+      args:
+        uid: ${UID}
+    container_name: contact
+    environment:
+      - APACHE_RUN_USER=#${UID}
+      - APACHE_RUN_GROUP=#${UID}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8083:80
+    networks:
+      backend:
+        aliases:
+          - contact
+
+  contact-db:
+    image: mysql:5.7
+    container_name: contact-db
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=contact
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    networks:
+      backend:
+        aliases:
+          - contact-db  
+
+networks:
+  backend:
+    name: backend-network

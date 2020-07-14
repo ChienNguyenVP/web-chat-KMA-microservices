@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  message:
+    build:
+      context: '.'
+      dockerfile: ./docker/php/Dockerfile
+      args:
+        uid: ${UID}
+    container_name: message
+    environment:
+      - APACHE_RUN_USER=#${UID}
+      - APACHE_RUN_GROUP=#${UID}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8082:80
+    networks:
+      backend:
+        aliases:
+          - message
+
+  message-db:
+    image: mysql:5.7
+    container_name: message-db
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=message
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    networks:
+      backend:
+        aliases:
+          - message-db  
+
+networks:
+  backend:
+    name: backend-network

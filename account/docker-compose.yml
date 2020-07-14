@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  account:
+    build:
+      context: '.'
+      dockerfile: ./docker/php/Dockerfile
+      args:
+        uid: ${UID}
+    container_name: account
+    environment:
+      - APACHE_RUN_USER=#${UID}
+      - APACHE_RUN_GROUP=#${UID}
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8080:80
+    networks:
+      backend:
+        aliases:
+          - account
+
+  account-db:
+    image: mysql:5.7
+    container_name: account-db
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=account
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    networks:
+      backend:
+        aliases:
+          - account-db  
+
+networks:
+  backend:
+    name: backend-network
