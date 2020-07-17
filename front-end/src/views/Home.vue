@@ -145,7 +145,8 @@
                 <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"><img v-if="user.avatar" :src="user.avatar" alt=""><img v-if="!user.avatar" src="assets/images/avatars/user.png" alt=""></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name">{{ user.name}}</span> <span class="account-description"></span></span></button> <!-- .dropdown-menu -->
                 <div class="dropdown-menu profile">
                   <div class="dropdown-arrow ml-3"></div>
-                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> {{ user.name }} </h6><a class="dropdown-item" href="http://webchat.com:8081/profile"><span class="dropdown-icon oi oi-person"></span> Thông tin cá nhân</a> <a @click="logout" class="dropdown-item" href=""><span class="dropdown-icon oi oi-account-logout"></span> Đăng xuất</a>
+                  <h6 class="dropdown-header d-none d-md-block d-lg-none"> {{ user.name }} </h6><router-link class="dropdown-item" :to="{ name: 'profile' }"><span class="dropdown-icon oi oi-person"></span>Thông tin cá nhân</router-link
+> <a @click="logout" class="dropdown-item" href=""><span class="dropdown-icon oi oi-account-logout"></span> Đăng xuất</a>
                   <!-- <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item" href="#">Keyboard Shortcuts</a> -->
                 </div><!-- /.dropdown-menu -->
               </div><!-- /.btn-account -->
