@@ -199,7 +199,7 @@ export default {
           Vue.$toast.warning(data.data.message, { position: 'top' })
           return
         }
-        Vue.$toast.success('Đã giải mã tin nhắn', { position: 'top' })
+        Vue.$toast.success('Đã lấy khóa tin nhắn', { position: 'top' })
         Vue.cookie.set('messageKey' + payload.conversation_id, data.data, 30)
         axios.get(`messages/${payload.conversation_id}`).then(data => {
           commit('setMessage', data.data)
@@ -214,7 +214,7 @@ export default {
           Vue.$toast.warning(data.data.message, { position: 'top' })
           return
         }
-        Vue.$toast.success('Đã khóa tin nhắn', { position: 'top' })
+        Vue.$toast.success('Đã gỡ khóa tin nhắn', { position: 'top' })
         Vue.cookie.delete('messageKey' + payload.conversation_id)
         axios.get(`messages/${payload.conversation_id}`).then(data => {
           commit('setMessage', data.data)

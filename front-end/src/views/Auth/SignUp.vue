@@ -11,7 +11,9 @@
       </h1>
       <p>
         Bạn đã có tài khoản? Có thể
-        <a href="auth-signin-v1.html">Đăng nhập</a>
+        <router-link :to="{ name: 'login' }"
+  >Đăng nhập</router-link
+>
       </p>
     </header>
     <!-- form -->
